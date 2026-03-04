@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PriceListScreen: View {
-    @StateObject var viewModel: PriceListViewModel = PriceListViewModel()
+    @StateObject var viewModel: PriceListViewModel
     var body: some View {
         NavigationStack {
             VStack {
@@ -49,5 +49,7 @@ struct PriceListScreen: View {
 }
 
 #Preview {
-    PriceListScreen()
+    PriceListScreen(
+        viewModel: PriceListViewModel(diContainer: MockDIContainer())
+    )
 }

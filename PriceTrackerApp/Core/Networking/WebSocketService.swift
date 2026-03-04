@@ -8,18 +8,26 @@
 import Foundation
 import Combine
 
-class WebSocketService: NSObject {
-    let url = URL(string: "wss://ws.postman-echo.com/raw")
+protocol WebSocketServiceProtocol {
+    var messagePublisher: PassthroughSubject<String, Never> { get }
+    func connect()
+    func disconnect()
+    func send(symbol: String, price: Double)
+}
 
-
+class WebSocketService: NSObject, WebSocketServiceProtocol {
     private var session: URLSession?
     private var task: URLSessionWebSocketTask?
     
     let messagePublisher = PassthroughSubject<String, Never>()
 
-    func connect() {
+    init(baseURL: URL) {
+        super.init()
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-        task = session?.webSocketTask(with: url!)
+        task = session?.webSocketTask(with: baseURL)
+    }
+
+    func connect() {
         task?.resume()
         listen()
     }
@@ -39,7 +47,6 @@ class WebSocketService: NSObject {
                 self.messagePublisher.send(msg)
             default:
                 break
-                
             }
             self.listen()
         }

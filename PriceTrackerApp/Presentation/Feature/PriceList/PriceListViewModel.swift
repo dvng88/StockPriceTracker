@@ -13,13 +13,14 @@ class PriceListViewModel: ObservableObject {
     @Published var isConnected: Bool = false
     @Published var isRunning: Bool = false
 
-    private let webSocket = WebSocketService()
+    private let webSocket: WebSocketServiceProtocol
 
     private let symbols = ["AAPL","GOOG","TSLA","AMZN","MSFT"]
     private var timerCancellable: AnyCancellable?
     private var cancellables  = Set<AnyCancellable>()
 
-    init() {
+    init(diContainer: DIContainerProtocol) {
+        webSocket = diContainer.webSocket
         setupStocks()
         webSocket.connect()
         start(symbols: symbols)

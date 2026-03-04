@@ -1,0 +1,12 @@
+//
+//  PRelease.xcconfig
+//  PriceTrackerApp
+//
+//  Created by Devang Shah on 05/03/2026.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+PROTOCOL = wss
+BASE_URL = ws.postman-echo.com/raw
