@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct PriceTrackerAppApp: App {
+    let diContainer = DIContainer()
     var body: some Scene {
         WindowGroup {
-            PriceListScreen()
+            PriceListScreen(viewModel: PriceListViewModel(diContainer: diContainer))
         }
     }
 }
