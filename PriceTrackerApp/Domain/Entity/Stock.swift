@@ -13,10 +13,10 @@ import Foundation
 
 
 struct Stock {
-    let id: UUID = UUID()
+    var id: String { symbol }
     let symbol: String
-    let price: Double
-    let previousPrice: Double
+    var price: Double
+    var previousPrice: Double
 
     func isPriceUp() -> Bool {
         price > previousPrice
