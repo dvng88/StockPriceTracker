@@ -11,7 +11,7 @@ import Combine
 
 class AppRouter: ObservableObject {
     enum Route: Hashable {
-        case details(Stock)
+        case details(String)
     }
 
     @Published var path = NavigationPath()
@@ -29,8 +29,8 @@ struct AppRouterView: View {
             PriceListScreen(viewModel: diContainer.makePriceListViewModel(), router: router)
                 .navigationDestination(for: AppRouter.Route.self) { route in
                     switch route {
-                    case .details(let stock):
-                        StockDetailScreen(viewModel: StockDetailViewModel(stock: stock))
+                    case .details(let symbol):
+                        StockDetailScreen(viewModel: diContainer.makeStockDetailViewModel(symbol))
                     }
                 }
         }

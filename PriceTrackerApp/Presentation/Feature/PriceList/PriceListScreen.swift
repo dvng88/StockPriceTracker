@@ -17,7 +17,7 @@ struct PriceListScreen: View {
                     ForEach(viewModel.stocks, id: \.id) { stock in
                         StockPriceRow(stock: stock)
                             .onTapGesture {
-                                router.push(.details(stock))
+                                router.push(.details(stock.symbol))
                             }
                     }
                 }
