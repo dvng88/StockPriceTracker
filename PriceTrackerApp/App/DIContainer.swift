@@ -11,6 +11,7 @@ protocol DIContainerProtocol {
     var webSocket: WebSocketServiceProtocol { get }
 
     func makePriceListViewModel() -> PriceListViewModel
+    func makeStockDetailViewModel(_ symbol: String) -> StockDetailViewModel
 }
 
 class DIContainer: DIContainerProtocol {
@@ -40,6 +41,13 @@ class DIContainer: DIContainerProtocol {
             toggleUseCase: TogglePriceUseCaseImpl(repository: repository)
         )
     }
+
+    func makeStockDetailViewModel(_ symbol: String) -> StockDetailViewModel {
+        StockDetailViewModel(
+            stockSymbol: symbol,
+            stockObserverUseCase: StockDetailObserverUseCaseImpl(repository: repository)
+        )
+    }
 }
 
 class MockDIContainer: DIContainerProtocol {
@@ -67,6 +75,13 @@ class MockDIContainer: DIContainerProtocol {
         PriceListViewModel(
             stockObserver: StockObserverUseCaseImpI(repository: repository),
             toggleUseCase: TogglePriceUseCaseImpl(repository: repository)
+        )
+    }
+
+    func makeStockDetailViewModel(_ symbol: String) -> StockDetailViewModel {
+        StockDetailViewModel(
+            stockSymbol: symbol,
+            stockObserverUseCase: StockDetailObserverUseCaseImpl(repository: repository)
         )
     }
 }

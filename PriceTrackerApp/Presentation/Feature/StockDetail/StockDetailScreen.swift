@@ -11,65 +11,69 @@ struct StockDetailScreen: View {
     @StateObject var viewModel: StockDetailViewModel
     var body: some View {
         VStack(alignment: .leading) {
-            Grid(alignment: .leading, verticalSpacing: 16) {
-                GridRow {
-                    Group {
-                        Text("Symbol")
-                        Text(":")
-                    }
+            if let stock = viewModel.stock {
+                Grid(alignment: .leading, verticalSpacing: 16) {
+                    GridRow {
+                        Group {
+                            Text("Symbol")
+                            Text(":")
+                        }
                         .foregroundColor(.secondary)
 
-                    Text(viewModel.stock.symbol)
-                }
-
-
-                Divider()
-
-                GridRow {
-                    Group {
-                        Text("Price")
-                        Text(":")
+                        Text(stock.symbol)
                     }
+
+                    Divider()
+
+                    GridRow {
+                        Group {
+                            Text("Price")
+                            Text(":")
+                        }
                         .foregroundColor(.secondary)
-                    PriceTextView(price: viewModel.stock.price)
-                }
-
-                Divider()
-
-                GridRow {
-                    Group {
-                        Text("Name")
-                        Text(":")
+                        HStack(spacing: 4) {
+                            Group {
+                                PriceTextView(price: stock.price)
+                                Text(stock.isPriceUp() ? "↑" : "↓")
+                            }
+                                .foregroundStyle(stock.isPriceUp() ? Color.green : Color.red)
+                        }
                     }
+
+                    Divider()
+
+                    GridRow {
+                        Group {
+                            Text("Name")
+                            Text(":")
+                        }
                         .foregroundColor(.secondary)
-                    Text(viewModel.stock.name)
-                }
-
-                Divider()
-
-                GridRow(alignment: .top) {
-                    Group {
-                        Text("Description")
-                        Text(":")
+                        Text(stock.name)
                     }
-                        .foregroundColor(.secondary)
-                    Text(viewModel.stock.description)
-                }
 
-                Divider()
+                    Divider()
+
+                    GridRow(alignment: .top) {
+                        Group {
+                            Text("Description")
+                            Text(":")
+                        }
+                        .foregroundColor(.secondary)
+                        Text(stock.description)
+                    }
+
+                    Divider()
+                }
             }
-
             Spacer()
         }
         .padding(16)
-        .navigationTitle(viewModel.stock.name)
+        .navigationTitle(viewModel.stock?.name ?? "")
     }
 }
 
 #Preview {
     StockDetailScreen(
-        viewModel: StockDetailViewModel(
-            stock: Stock.mock()
+        viewModel: MockDIContainer().makeStockDetailViewModel("AAPL")
         )
-    )
 }
