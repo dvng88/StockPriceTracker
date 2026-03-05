@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 protocol WebSocketServiceProtocol {
+    var stockList: [StockDTO] { get }
     var messagePublisher: AnyPublisher<String, Never> { get }
     var connectionPublisher: AnyPublisher<Bool, Never> { get }
 
@@ -32,12 +33,29 @@ class WebSocketService: NSObject, WebSocketServiceProtocol {
         connectionSubject.eraseToAnyPublisher()
     }
 
+    var stockList: [StockDTO] = []
+
     private let baseURL: URL
 
     init(baseURL: URL) {
         self.baseURL = baseURL
         super.init()
+        setupStocks()
+
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+    }
+
+    func setupStocks() {
+        if let url = Bundle.main.url(forResource: "StockList", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let stocks = try JSONDecoder().decode([StockDTO].self, from: data)
+                print("Loaded \(stocks.count) stocks from file.")
+                stockList = stocks
+            } catch {
+                print("File loading error: \(error)")
+            }
+        }
     }
 
     func connect() {
