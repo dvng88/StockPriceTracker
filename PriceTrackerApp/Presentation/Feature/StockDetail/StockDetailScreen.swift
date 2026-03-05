@@ -34,9 +34,11 @@ struct StockDetailScreen: View {
                         HStack(spacing: 4) {
                             Group {
                                 PriceTextView(price: stock.price)
+
                                 Text(stock.isPriceUp() ? "↑" : "↓")
+                                    .opacity(stock.flashState != .none ? 1 : 0)
                             }
-                                .foregroundStyle(stock.isPriceUp() ? Color.green : Color.red)
+                            .foregroundStyle(priceDirectionColor(stock.flashState))
                         }
                     }
 
@@ -69,6 +71,19 @@ struct StockDetailScreen: View {
         }
         .padding(16)
         .navigationTitle(viewModel.stock?.name ?? "")
+    }
+}
+
+extension StockDetailScreen {
+    private func priceDirectionColor(_ state: Stock.FlashState) -> Color {
+        switch state {
+        case .none:
+            Color.black
+        case .up:
+            Color.green
+        case .down:
+            Color.red
+        }
     }
 }
 

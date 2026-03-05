@@ -27,8 +27,4 @@ class StockObserverUseCaseImpI: StockObserverUseCase {
     func execute() -> AnyPublisher<[Stock], Never> {
         repository.stockPublisher
     }
-
-
-
-
 }
