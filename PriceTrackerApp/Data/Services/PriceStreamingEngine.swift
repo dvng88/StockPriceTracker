@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol PriceStreamingEngine {
-    func start(symbols: [String])
+    func start(symbols: [Stock])
     func stop()
 }
 
@@ -21,13 +21,13 @@ class DefaultPriceStreamingEngine: PriceStreamingEngine {
         self.webSocket = webSocket
     }
 
-    func start(symbols: [String]) {
+    func start(symbols: [Stock]) {
         timer = Timer.publish(every: 2, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 symbols.forEach {
-                    let price = Double.randomGenerator
-                    self?.webSocket.send(symbol: $0, price: price)
+                    let price = $0.price + Double.random(in: -5...5)
+                    self?.webSocket.send(symbol: $0.symbol, price: price)
                 }
             }
     }

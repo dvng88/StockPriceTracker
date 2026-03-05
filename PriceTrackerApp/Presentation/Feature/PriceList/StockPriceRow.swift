@@ -39,6 +39,11 @@ struct StockPriceRow: View {
 
 #Preview {
     StockPriceRow(
-        stock: Stock(symbol: "AAPL", price: 30, previousPrice: 29)
+        stock: Stock(
+            symbol: "AAPL",
+            name: "Apple",
+            description: "Apple Company",
+            price: 30,
+            previousPrice: 29)
     )
 }

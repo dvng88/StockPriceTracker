@@ -30,7 +30,10 @@ class StockPriceRepository: StockPriceRepositoryProtocol {
         webSocket.connectionPublisher
     }
 
-    private let symbols = ["AAPL","GOOG","TSLA","AMZN","MSFT"]
+    private var symbols: [StockDTO] {
+        webSocket.stockList
+    }
+
     private let webSocket: WebSocketServiceProtocol
     private let streamingEngine: PriceStreamingEngine
 
@@ -44,14 +47,14 @@ class StockPriceRepository: StockPriceRepositoryProtocol {
 
     private func setupStocks() {
         stocks = symbols.map {
-            Stock(symbol: $0, price: Double.randomGenerator, previousPrice: 0)
+            Stock(symbol: $0.symbol, name: $0.name, description: $0.description, price: Double.randomGenerator, previousPrice: 0)
         }
         stockSubject.send(stocks)
     }
 
     func start() {
         webSocket.connect()
-        streamingEngine.start(symbols: symbols)
+        streamingEngine.start(symbols: stocks)
     }
 
     func stop() {
