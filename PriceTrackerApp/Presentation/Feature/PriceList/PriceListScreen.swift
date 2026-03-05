@@ -28,6 +28,7 @@ struct PriceListScreen: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     stockToggleButton(isRunning: viewModel.isRunning) {
                         // Change Status
+                        viewModel.togglePriceFeed()
                     }
                 }
             }
@@ -50,6 +51,6 @@ struct PriceListScreen: View {
 
 #Preview {
     PriceListScreen(
-        viewModel: PriceListViewModel(diContainer: MockDIContainer())
+        viewModel: MockDIContainer().makePriceListViewModel()
     )
 }

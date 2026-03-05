@@ -12,7 +12,7 @@ struct PriceTrackerAppApp: App {
     let diContainer = DIContainer()
     var body: some Scene {
         WindowGroup {
-            PriceListScreen(viewModel: PriceListViewModel(diContainer: diContainer))
+            PriceListScreen(viewModel: diContainer.makePriceListViewModel())
         }
     }
 }

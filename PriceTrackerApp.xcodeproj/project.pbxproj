@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7F9EFCAE2F58D43E00EFAE75 /* Exceptions for "PriceTrackerApp" folder in "PriceTrackerApp" target */ = {
+		7F87C40C2F5952C200EA9C10 /* Exceptions for "PriceTrackerApp" folder in "PriceTrackerApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -24,7 +24,7 @@
 		7F9EFAA02F585A4600EFAE75 /* PriceTrackerApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				7F9EFCAE2F58D43E00EFAE75 /* Exceptions for "PriceTrackerApp" folder in "PriceTrackerApp" target */,
+				7F87C40C2F5952C200EA9C10 /* Exceptions for "PriceTrackerApp" folder in "PriceTrackerApp" target */,
 			);
 			path = PriceTrackerApp;
 			sourceTree = "<group>";
