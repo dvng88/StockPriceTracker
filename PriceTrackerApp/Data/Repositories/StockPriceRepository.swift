@@ -73,10 +73,9 @@ class StockPriceRepository: StockPriceRepositoryProtocol {
     }
 
     private func updateStock(byMessage msg: String) {
-        let parts = msg.split(separator: ":", maxSplits: 1)
-        guard parts.count == 2, let price = Double(parts[1]) else { return }
-
-        let symbol = String(parts[0])
+        guard let symbolPart = msg.splitSymbolPrice else { return }
+        let symbol = symbolPart.symbol
+        let price = symbolPart.price
 
         guard let index = stocks.firstIndex(where: { $0.symbol == symbol }) else { return }
 

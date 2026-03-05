@@ -15,12 +15,11 @@ class StockDetailViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     private let stockObserverUseCase: StockDetailObserverUseCase
 
-    init(
-        stockSymbol: String,
-        stockObserverUseCase: StockDetailObserverUseCase) {
-            self.stockObserverUseCase = stockObserverUseCase
+    init(stockSymbol: String,
+         stockObserverUseCase: StockDetailObserverUseCase) {
+        self.stockObserverUseCase = stockObserverUseCase
 
-            setupStockObserverBinding(ForSymbol: stockSymbol)
+        setupStockObserverBinding(ForSymbol: stockSymbol)
     }
 
     func setupStockObserverBinding(ForSymbol symbol: String) {
