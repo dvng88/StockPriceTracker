@@ -10,9 +10,10 @@ import SwiftUI
 @main
 struct PriceTrackerAppApp: App {
     let diContainer = DIContainer()
+    let router = AppRouter()
     var body: some Scene {
         WindowGroup {
-            PriceListScreen(viewModel: diContainer.makePriceListViewModel())
+            AppRouterView(router: router, diContainer: diContainer)
         }
     }
 }

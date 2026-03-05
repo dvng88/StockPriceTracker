@@ -19,7 +19,7 @@ struct StockDTO: Decodable {
     let description: String
 }
 
-struct Stock {
+struct Stock: Hashable {
     var id: String { symbol }
     let symbol: String
     let name: String
@@ -29,5 +29,14 @@ struct Stock {
 
     func isPriceUp() -> Bool {
         price > previousPrice
+    }
+
+    static func mock() -> Stock {
+        Stock(
+            symbol: "AAPL",
+            name: "Apple Inc.",
+            description: "Global technology leader known for the iPhone and high-margin services.",
+            price: 30,
+            previousPrice: 29)
     }
 }

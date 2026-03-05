@@ -22,7 +22,7 @@ struct StockPriceRow: View {
 
                 Spacer()
 
-                Text(String(format: "%.2f", stock.price))
+                PriceTextView(price: stock.price)
                     .foregroundStyle(Color.black)
 
                 Text(stock.isPriceUp() ? "↑" : "↓")
@@ -39,11 +39,6 @@ struct StockPriceRow: View {
 
 #Preview {
     StockPriceRow(
-        stock: Stock(
-            symbol: "AAPL",
-            name: "Apple",
-            description: "Apple Company",
-            price: 30,
-            previousPrice: 29)
+        stock: Stock.mock()
     )
 }
