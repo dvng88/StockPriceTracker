@@ -19,13 +19,18 @@ struct StockDTO: Decodable {
     let description: String
 }
 
-struct Stock: Hashable {
+
+
+struct Stock: Identifiable, Hashable {
     var id: String { symbol }
     let symbol: String
     let name: String
     let description: String
     var price: Double = 0
     var previousPrice: Double = 0
+    var flashState: FlashState = .none
+
+    enum FlashState: Equatable { case none, up, down }
 
     func isPriceUp() -> Bool {
         price > previousPrice

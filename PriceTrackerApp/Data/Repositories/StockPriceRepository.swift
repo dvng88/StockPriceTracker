@@ -80,11 +80,21 @@ class StockPriceRepository: StockPriceRepositoryProtocol {
 
         guard let index = stocks.firstIndex(where: { $0.symbol == symbol }) else { return }
 
-        stocks[index].previousPrice = stocks[index].price
+        let previousPrice = stocks[index].price
+        stocks[index].previousPrice = previousPrice
         stocks[index].price = price
+        stocks[index].flashState = price >= previousPrice ? .up : .down
 
         stocks.sort { $0.price > $1.price }
 
         stockSubject.send(stocks)
+
+        // Clear flash after 1 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self else { return }
+            guard let i = self.stocks.firstIndex(where: { $0.symbol == symbol }) else { return }
+            self.stocks[i].flashState = .none
+            self.stockSubject.send(self.stocks)
+        }
     }
 }
