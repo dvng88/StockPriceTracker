@@ -108,4 +108,4 @@ UI automatically updates when the publisher emits new values.
   
 [`PriceTrackerApp.mov`](docs/Video/PriceTrackerDemo.mov)
 
-[PriceTrackerApp.mov]()
+[StockTrackerApp.webm](https://github.com/user-attachments/assets/b4d0197c-7f25-4ed0-a7fd-b29428881704)
