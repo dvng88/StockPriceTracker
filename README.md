@@ -93,3 +93,19 @@ SwiftUI View
 UI automatically updates when the publisher emits new values.
 
 ## Screenshot / Video
+
+- Screenshots
+
+<div align="left">
+  <img src="docs/Screenshot/Idle_stock_list.png" alt="Screenshot 1" width="24%" />
+  <img src="docs/Screenshot/Running_flash_price_change.png" alt="Screenshot 2" width="24%" />
+  <img src="docs/Screenshot/Running_flash_price_idle.png" alt="Screenshot 3" width="24%" />
+  <img src="docs/Screenshot/stock_detail_live_price_change_down.png" alt="Screenshot 4" width="24%" />
+  <img src="docs/Screenshot/stock_detail_live_price_change_up.png" alt="Screenshot 5" width="24%" />
+</div>
+
+- Video
+  
+[`PriceTrackerApp.mov`](docs/Video/PriceTrackerDemo.mov)
+
+[PriceTrackerApp.mov]()
